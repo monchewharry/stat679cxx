@@ -1,0 +1,72 @@
+// Stack.template: implementation file for Stack<T> template class.
+
+#include <cassert>
+#include <iostream>
+
+using namespace std;
+
+template <typename T>
+Stack<T>::Stack() {
+    head = NULL;
+}
+
+template <typename T>
+Stack<T>::~Stack() {
+    while (head) { // delete list
+        Node<T> *p = head;
+        head = head->next;
+        delete p;
+    }
+}
+
+template <typename T>
+void Stack<T>::push(T t) {
+    Node<T> *p = new Node<T>;
+    p->data = t;
+    p->next = head;
+    head = p;
+}
+
+template <typename T>
+T Stack<T>::pop() {
+    Node<T> *p = head;
+    assert(!empty());
+    T t = head->data;
+    head = head->next;
+    delete p;
+    return t;
+}
+
+template <typename T>
+T Stack<T>::operator[](int i) const {
+    int n = size() - 1;//using the size() method here
+    Node<T> *p = head;
+    while((n - i) > 0){
+        p = p->next;
+        i ++;
+    }
+    T t = p->data;//not delete p
+    return t;
+}
+
+template <typename T>
+bool Stack<T>::empty() const {
+    return head == 0;
+}
+
+template <typename T>
+int Stack<T>::size() const {
+    int n = 0;
+    for (Node<T> *p = head; p; p = p->next)
+        n++;
+    return n;
+}
+
+template <typename T>
+void Stack<T>::debug() const {
+    int n = size() - 1;//using the size() method here
+    for (Node<T> *p = head; p; p = p->next) {
+        cout << "   [" << n << "]=" << p->data << endl;
+        n--;
+    }
+}

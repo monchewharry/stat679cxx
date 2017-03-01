@@ -1,0 +1,107 @@
+// Last name: Dingxian  
+// First name: Cao
+// NetID: 9074463432
+
+// queens.cxx: runs stack-based backtracking search to solve n-queens
+// problem.
+
+#include <iostream>
+#include <cstdlib>
+#include "Stack.h"
+#include <cmath>
+using namespace std;
+
+// ... You're welcome to add function prototypes of your own design
+// here.  Put corresponding implementations below main().
+
+// Runs n-queens search.  Prints queen configuration if there's a
+// solution; otherwise prints "no solution exists".   If "debug" is
+// true, also prints each configuration of queens encountered during
+// the search.
+void queens_search(int n, bool debug);
+bool safe(Stack<int> &x);
+
+// I've written main() for you.
+int main(int argc, char *argv[]) {
+    int n_queens;
+    bool debug = false;
+
+    if (!(argc == 2 || argc == 3)) {
+	cerr << "usage: " << argv[0]
+	     << " <n_queens> [<optional 'd' means debug>]"
+	     << endl;
+	return 0;
+    }
+
+    n_queens = atoi(argv[1]);
+    if (argc == 3) {
+	debug = (argv[2][0] == 'd');
+    }
+  
+    queens_search(n_queens, debug);
+    return 0;
+}
+
+
+void queens_search(int n, bool debug) {
+    if (debug) {
+	cerr << "n=" << n << ", debug=" << debug << endl;
+    }
+
+    int step=1;
+    Stack<int> s;
+    s.push(0);//initial (0,0)
+
+    while (s.empty() == 0){//if the stack isnot empty
+	if(debug){
+	  cout << "step - "<<step<<endl;
+	  s.debug();//print step results
+	}
+
+      if(safe(s)){// last queen is safe
+            if(s.size()==n){
+	      cout << "step-" << step <<endl;
+	      cout<<"the solution is"<<endl;
+	      s.debug();
+	      break;
+	    }else{
+                s.push(0);
+            }
+
+        }else{// last q under attack
+            while(s[s.size()-1] == (n-1)){
+                s.pop();
+		if(s.size()==0){break;}
+	    }// not the most-right column
+	    if(s.empty()){
+	      cout << "no solution exists"<<endl;
+	      break;
+	    }
+
+	    int temp;
+            temp = s.pop();
+            s.push(temp+1);
+            }
+        step ++;
+    }
+    
+}
+
+bool safe(Stack<int> &x){
+    int ii =0;
+    for (int i = 0; i < x.size(); ++i){
+        if(x[x.size()-1] == x[i]){
+            ii +=1;
+        }
+    }
+
+    bool safeornot;
+    if(x.size()==1){
+        safeornot= true;
+    }else if(ii > 1 || abs(x[x.size()-1] - x[x.size()-2]) <=1){
+        safeornot= false;
+    }else{
+        safeornot= true;
+    }
+    return safeornot;
+}
