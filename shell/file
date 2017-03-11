@@ -1,0 +1,38 @@
+#!/bin/bash
+if [ $# != 2 ]; then
+echo "usage: $0 <usernames> <n>"
+##exit 0
+fi
+
+if [ ! -d ./mess ]; then
+    mkdir -p ./mess;
+fi
+cd ./mess;
+pwd;
+
+sum=0
+com="echo $2 "
+while IFS='' read -r line || [[ -n "$line" ]];
+do
+    sum=`expr $sum + 1`
+    mkdir $line
+    cat << END_NAME > ./$line/increment.cxx
+#include <iostream>
+using namespace std;
+int main() {
+int n = 0;
+cin >> n;
+cout << n + $sum << endl;
+return 0;
+}
+END_NAME
+    g++ -Wall -g -o ./$line/x ./$line/increment.cxx
+    com+="| $line/x "
+done < "../$1"
+
+eval $com;
+
+for d in */ ; do
+    rm "$d/x"
+    done
+cd ..;

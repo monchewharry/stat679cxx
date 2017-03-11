@@ -20,6 +20,7 @@ using namespace std;
 // the search.
 void queens_search(int n, bool debug);
 bool safe(Stack<int> &x);
+int config(Stack<int> &x);
 
 // I've written main() for you.
 int main(int argc, char *argv[]) {
@@ -55,14 +56,14 @@ void queens_search(int n, bool debug) {
     while (s.empty() == 0){//if the stack isnot empty
 	if(debug){
 	  cout << "step - "<<step<<endl;
-	  s.debug();//print step results
+	  config(s);//print step results
 	}
 
       if(safe(s)){// last queen is safe
             if(s.size()==n){
 	      cout << "step-" << step <<endl;
 	      cout<<"the solution is"<<endl;
-	      s.debug();
+	      config(s);
 	      break;
 	    }else{
                 s.push(0);
@@ -104,4 +105,18 @@ bool safe(Stack<int> &x){
         safeornot= true;
     }
     return safeornot;
+}
+
+int config(Stack<int> &x){
+  int dim ;
+  dim = x.size();
+  for(int i = 0; i < dim; ++i){
+    for(int loc=0;loc < dim; ++loc){
+      if(loc < x[i]){cout << "| ";
+      }else if(loc == x[i]){cout<<"|Q";
+      }else{cout << "| ";}
+    }
+    cout <<"|"<<endl;
+  }
+   return 0;
 }
