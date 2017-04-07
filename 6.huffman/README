@@ -1,0 +1,80 @@
+Please answer the following questions:
+
+1. What program files did you produce? For each program, explain its
+   purpose and give a usage line:
+
+   (Here's a sample answer that refers to the n-queens homework:
+
+       queens.cxx uses a stack-based backtracking algorithm to solve
+       the n-queens problem, which requires that we place n queens on
+       an n by n chessboard in a way that no queen is under attack.
+       The program displays a queen configuration if one exists, or
+       says that no solution exists. The program has an optional
+       debugging flag which causes it to print out partial solutions
+       as the search proceeds.
+       
+       usage: nq <n_queens> [<optional 'd' means debug>]
+   )
+
+   For each program, write a paragraph giving an overview of your
+   design (e.g. how did you decompose the problem into functions, and
+   how do these functions interact?)
+
+2. Provide a log of the time you spent working on this project.
+   Include the time you spent in each of the following areas:
+   -- Reading and understanding the assignment
+   -- Design
+   -- Coding
+   -- Testing code for full functionallity
+   -- Debugging
+
+3. Did you like the assignment? Why or why not? Please offer
+   criticisms so that we can improve it if we use it again.
+
+4. What part of the assignment gave you the most trouble? What did
+   you do to figure it out?
+
+5. What bugs remain in your code? (Note: in the real world, some of
+   your code will have bugs when it leaves your control. Your
+   colleagues will like you better if you tell them about bugs up
+   front, since then they don't have to figure out what you already
+   know. Your TAs are your "colleagues" in the 2270 game.)
+
+[ The remaining questions are technical exercises to help you
+  understand Huffman coding, priority queues, and data compression.
+]
+
+6. Create a Huffman code tree for the set of character frequencies
+   below. (This is the start of the Fibonacci sequence.)  Draw your
+   tree using "ASCII art" as in my tree in the homework 7
+   description. Then fill in the code words in the chart below.
+
+   -------------------------------------------------------------------
+   character:     a      b      c      d      e      f      g     h
+   -------------------------------------------------------------------
+   count:         1      1      2      3      5      8     13     21
+   -------------------------------------------------------------------
+   code word:
+   -------------------------------------------------------------------
+
+7. Let A be the size of our alphabet, i.e. the number of different
+   characters in the file we're compressing. We used the STL's
+   priority queue to construct a Huffman code tree. We made A
+   insertions of one trivial tree for each positive character count;
+   then we repeated (A - 1) times the sequence remove, remove, insert;
+   and finally we removed our code tree.
+
+   a. Suppose that the STL implemented its priority_queue type using a
+      heap. What would be the big-O cost in terms of A of these
+      priority queue operations?
+
+   b. Suppose that the STL implemented its priority_queue type using a
+      sorted list. What would be the big-O cost in terms of A of these
+      priority queue operations?
+
+   c. You should have found that the run time in (a) is a lot better
+      than the run time in (b). Why, in the case of data compression,
+      does this difference not matter much?
+
+8. Argue that there does not exist a compression strategy that works
+   on all files while still allowing correct decompression.
