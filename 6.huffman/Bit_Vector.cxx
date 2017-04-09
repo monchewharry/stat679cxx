@@ -13,11 +13,11 @@ void Bit_Vector::write(ostream &os) {
     os << size() << endl;
 
     for (size_t i = 0; i < size(); i++) {
-	if ((i > 0) && ((i % 8) == 0)) {
-	    os.put(c);
-	    c = 0;
-	}
-	c |= ((*this)[i] << (i % 8)); // Set bit number (i % 8) of c.
+        if ((i > 0) && ((i % 8) == 0)) {
+	       os.put(c);
+	        c = 0;
+        }
+	   c |= ((*this)[i] << (i % 8)); // Set bit number (i % 8) of c.
     }
     os.put(c);
 }

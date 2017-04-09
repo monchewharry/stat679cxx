@@ -18,12 +18,7 @@
 using namespace std;
 
 int main() {
-    Bit_Vector bits;          // Create a bit vector containing the
-                              // bits 01000001, which fit in one byte
-                              // whose integer value is 65. The ASCII
-                              // character with value 65 is 'A', so
-                              // the byte written this bit vector
-                              // should look like an 'A'.
+    Bit_Vector bits;          
     bits.push_back(1); // 1 * 2^0 =  1; this is like "bits[0] = 1;"
     bits.push_back(0); // 0 * 2^1 =  0
     bits.push_back(0); // 0 * 2^2 =  0
@@ -38,7 +33,7 @@ int main() {
     assert(ofs.good());
     // Now write bits to a file. This writes its length, 8 bits,
     // followed by its bytes, ASCII 65, an 'A'.
-    bits.write(ofs);
+    bits.write(ofs);//10000010
     ofs << endl;
     ofs.close();
 
