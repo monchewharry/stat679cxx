@@ -2,8 +2,10 @@ all: io bits d c
 
 io: iostreamExample.cxx
 	g++ -Wall -g -o io iostreamExample.cxx
-c: compress.cxx
-	g++ -Wall -g -o c compress.cxx
+compress.o: compress.cxx
+	g++ -Wall -g -c compress.cxx
+c: Bit_Vector.o compress.cxx
+	g++ -Wall -g -o c Bit_Vector.o compress.cxx
 
 decompress.o: decompress.cxx
 	g++ -Wall -g -c decompress.cxx

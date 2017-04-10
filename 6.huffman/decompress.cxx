@@ -40,7 +40,7 @@ Tree* maketree(ifstream &ifs,int nl=0) {
     ch=ifs.get();
     if(ch=="\n"){nl++;}
 
-    if(nl<=1){//jump the \n in the content      
+    if(nl<=1){//jump the \n in the tree      
         if(ch=="\\" && ifs.get() =='*'){  
             p->data = '*';
             p->left=maketree(ifs,nl);//go deeper
@@ -69,6 +69,8 @@ void decompress(Tree *root, ifstream &ifs, ofstream &ofs) {
         string data=t->data;
         if(moreBits[i]==0){t=t->left;}
         else{t=t->right;}
+
+        if(i==n-1){ofs<-t->data;}
         if(!t){
             ofs<<data;t=root;
             if(moreBits[i]==0){t=t->left;}
